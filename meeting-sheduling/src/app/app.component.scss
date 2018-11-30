@@ -1,0 +1,11 @@
+nav
+{
+    span
+    {
+        margin-right:30px;
+        .router-link-active
+        {
+            background-color: aquamarine;
+        }
+    }
+}
