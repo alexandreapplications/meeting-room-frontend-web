@@ -1,3 +1,59 @@
 <p>
   subscribe works!
 </p>
+<p>Do you have a company and you want to administrate its meeting rooms?</p>
+<form [formGroup]='_recordForm' *ngIf="_recordForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <h3>Your User</h3>
+    <div><label>Code</label><input type="text" formControlName="code" />
+      <p *ngIf="_recordForm.get('code').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('code').getError('minlength')">This field must have at least {{
+        this._recordForm.get('code').getError('minlength').requiredLength }} chars</p>
+
+
+    </div>
+    <div><label>Name</label><input type="text" formControlName="name" />
+      <p *ngIf="_recordForm.get('name').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('name').getError('minlength')">This field must have at least {{
+        this._recordForm.get('name').getError('minlength').requiredLength }} chars</p>
+
+    </div>
+    <div><label>Email</label><input type="email" formControlName="email" />
+      <p *ngIf="_recordForm.get('email').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('email').getError('email')">This email is invalid</p>
+    </div>
+    <div><label>Phone</label><input type="tel" formControlName="telephone" />
+      <p *ngIf="_recordForm.get('telephone').getError('minlength')">This field must have at least {{
+        this._recordForm.get('telephone').getError('minlength').requiredLength }} chars</p>
+
+    </div>
+    <h3>Your company</h3>
+    <div><label>Subscriber code <small>Used to enter the site</small> </label>
+      <input type="text" formControlName="subscriberCode" />
+      <p *ngIf="_recordForm.get('subscriberCode').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('subscriberCode').getError('minlength')">This field must have at least {{
+        this._recordForm.get('subscriberCode').getError('minlength').requiredLength }} chars</p>
+
+    </div>
+    <div><label>Company Name</label><input type="text" formControlName="subscriberName" />
+      <p *ngIf="_recordForm.get('subscriberName').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('subscriberName').getError('minlength')">This field must have at least {{
+        this._recordForm.get('subscriberName').getError('minlength').requiredLength }} chars</p>
+
+    </div>
+    <div><label>Company Main Email</label><input type="email" formControlName="subscriberEmail" />
+      <p *ngIf="_recordForm.get('subscriberEmail').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('subscriberEmail').getError('email')">This email is invalid</p>
+    </div>
+    
+    <div><label>Remarks to be shown on main screen</label><input type="text" formControlName="subscriberRemarks" />
+      <p *ngIf="_recordForm.get('subscriberRemarks').getError('required')">This field is required</p>
+      <p *ngIf="_recordForm.get('subscriberRemarks').getError('minlength')">This field must have at least {{
+        this._recordForm.get('subscriberRemarks').getError('minlength').requiredLength }} chars</p>
+
+    </div>
+  </fieldset>
+  <div>
+    <input type="submit" [disabled]="_recordForm.invalid" value="Save" />
+  </div>
+</form>
