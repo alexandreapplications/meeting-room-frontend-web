@@ -10,12 +10,11 @@ import { SubscriptionModel } from 'src/app/models/subscription.model';
 })
 export class MainComponent implements OnInit {
 
-  public company: string;
   protected subscriberModel: SubscriptionModel;
   constructor(private activeRoute: ActivatedRoute,
     private subscriptionService: SubscriptionService) {
-    this.company = activeRoute.snapshot.params['company'];
-    this.subscriptionService.getSubscriber(this.company)
+    const company = activeRoute.snapshot.params['company'];
+    this.subscriptionService.getSubscriber(company)
       .then(x => this.subscriberModel = x)
       .catch(x => { alert(x), console.error(x); });
    }

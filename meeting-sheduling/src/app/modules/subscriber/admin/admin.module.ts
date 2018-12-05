@@ -8,15 +8,25 @@ import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { MySubscriptionComponent } from './my-subscription/my-subscription.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../_shared/shared.module';
-
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatTableModule, MatButtonModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    FormsModule,
+    SharedModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   declarations: [
     PlaceGroupListComponent,

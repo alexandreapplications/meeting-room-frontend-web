@@ -1,68 +1,81 @@
 <mrs-subscriber-menu></mrs-subscriber-menu>
-<hr />
 <form [formGroup]='_recordForm' (ngSubmit)="onSubmit()" *ngIf="_recordForm">
-  <h3>{{ (_isNew ? "Create" : "Edit") }}</h3>
-  <div>
-    <label>Code</label>
-    <input type="text" formControlName="code" />
-    <p *ngIf="_recordForm.get('code').getError('required')">This field is required</p>
-    <p *ngIf="_recordForm.get('code').getError('minlength')">This field must have at least {{
-      this._recordForm.get('code').getError('minlength').requiredLength }} chars</p>
-  </div>
-  <div>
-    <label>Name</label>
-    <input type="text" formControlName="name" />
-    <p *ngIf="_recordForm.get('name').getError('required')">This field is required</p>
-    <p *ngIf="_recordForm.get('name').getError('minlength')">This field must have at least {{
-      this._recordForm.get('name').getError('minlength').requiredLength }} chars</p>
-  </div>
-  <div formArrayName="telephones">
-    <label>Phones</label>
-    <div *ngFor="let item of telephones.controls; let i = index">
-      <div [formGroup]="item">
-        <select formControlName="type">
-          <option>--</option>
-          <option value="Main">Main</option>
-          <option value="Personal">Personal</option>
-          <option value="Other">Other</option>
-        </select>
-        <p *ngIf="item.get('type').getError('required')">This field is required</p>
-        <input type="tel" formControlName="value" />
-        <p *ngIf="item.get('value').getError('required')">This field is required</p>
-        <p *ngIf="item.get('value').getError('minlength')">This field must have at least
-          {{ this.item.get('value').getError('minlength').requiredLength }} chars</p>
-        <input type="text" formControlName="remarks" />
-        <p *ngIf="item.get('remarks').getError('minlength')">This field must have at least
-          {{ item.get('remarks').getError('minlength').requiredLength }} chars</p>
-      </div>
-    </div>
-    <div><button type="button" (click)="addNewPhoneGroup()">Add</button> </div>
+  <mat-card>
+    <mat-card-title>{{ (_isNew ? "Create" : "Edit") }} User</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput type="text" formControlName="code" placeholder="Code" />
+        <mat-error *ngIf="_recordForm.get('code').getError('required')">This field is required</mat-error>
+        <mat-error *ngIf="_recordForm.get('code').getError('minlength')">This field must have at least {{
+          this._recordForm.get('code').getError('minlength').requiredLength }} chars</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="name" placeholder="Name" />
+        <mat-error *ngIf="_recordForm.get('name').getError('required')">This field is required</mat-error>
+        <mat-error *ngIf="_recordForm.get('name').getError('minlength')">
+          This field must have at least {{ this._recordForm.get('name').getError('minlength').requiredLength }} chars
+        </mat-error>
+      </mat-form-field>
 
-  </div>
-  <div formArrayName="emails">
-    <label>Emails</label>
-    <div *ngFor="let item of emails.controls; let i = index">
-      <div [formGroup]="item">
-        <select formControlName="type">
-          <option>--</option>
-          <option value="Main">Main</option>
-          <option value="Personal">Personal</option>
-          <option value="Other">Other</option>
-        </select>
-        <p *ngIf="item.get('type').getError('required')">This field is required</p>
-        <input type="email" formControlName="value" />
-        <p *ngIf="item.get('value').getError('required')">This field is required</p>
-        <p *ngIf="item.get('value').getError('email')">The email is invalid</p>
-        <input type="text" formControlName="remarks" />
-        <p *ngIf="item.get('remarks').getError('minlength')">This field must have at least
-          {{ item.get('remarks').getError('minlength').requiredLength }} chars</p>
+      <div formArrayName="telephones">
+        <label>Phones <button type="button" mat-button (click)="addNewPhoneGroup()">
+            <mat-icon>add</mat-icon>
+          </button></label>
+        <div *ngFor="let item of telephones.controls; let i = index">
+          <div [formGroup]="item">
+            <mat-form-field>
+              <mat-select formControlName="type">
+                <mat-option>--</mat-option>
+                <mat-option value="Main">Main</mat-option>
+                <mat-option value="Personal">Personal</mat-option>
+                <mat-option value="Other">Other</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-error *ngIf="item.get('type').getError('required')">This field is required</mat-error>
+            <mat-form-field>
+              <input type="tel" matInput formControlName="value" />
+              <mat-error *ngIf="item.get('value').getError('required')">This field is required</mat-error>
+              <mat-error *ngIf="item.get('value').getError('minlength')">This field must have at least
+                {{ this.item.get('value').getError('minlength').requiredLength }} chars</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput formControlName="remarks" />
+              <mat-error *ngIf="item.get('remarks').getError('minlength')">This field must have at least
+                {{ item.get('remarks').getError('minlength').requiredLength }} chars</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
       </div>
-    </div>
-    <div><button type="button" (click)="addNewEmailGroup()">Add</button></div>
-  </div>
-  <div>
-    <input type="submit" [disabled]="_recordForm.invalid || emails.invalid || telephones.invalid" value="Save" />
-  </div>
+      <div formArrayName="emails">
+        <label>Emails <button type="button" mat-button (click)="addNewEmailGroup()"><mat-icon>add</mat-icon></button></label>
+        <div *ngFor="let item of emails.controls; let i = index">
+          <div [formGroup]="item">
+            <mat-form-field>
+              <mat-select formControlName="type">
+                <mat-option>--</mat-option>
+                <mat-option value="Main">Main</mat-option>
+                <mat-option value="Personal">Personal</mat-option>
+                <mat-option value="Other">Other</mat-option>
+              </mat-select>
+              <mat-error *ngIf="item.get('type').getError('required')">This field is required</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input type="email" matInput formControlName="value" />
+              <mat-error *ngIf="item.get('value').getError('required')">This field is required</mat-error>
+              <mat-error *ngIf="item.get('value').getError('email')">The email is invalid</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput formControlName="remarks" />
+              <mat-error *ngIf="item.get('remarks').getError('minlength')">This field must have at least
+                {{ item.get('remarks').getError('minlength').requiredLength }} chars</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button color="primary" [disabled]="_recordForm.invalid || emails.invalid || telephones.invalid">Salvar</button>
+      <a mat-button color="basic" [routerLink]="['../']" routerLinkActive="router-link-active">Cancelar</a>
+    </mat-card-actions>
+  </mat-card>
 </form>
-<hr />
-<a [routerLink]="['../']" routerLinkActive="router-link-active">List</a>

@@ -6,17 +6,22 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { LandingRoutingModule } from './landing.routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LandingMenuComponent } from './_shared/parts/landing-menu/landing-menu.component';
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   declarations: [
     MainComponent,
     AboutComponent,
     ContactComponent,
-    SubscribeComponent]
+    SubscribeComponent,
+    LandingMenuComponent]
 })
 export class LandingModule { }

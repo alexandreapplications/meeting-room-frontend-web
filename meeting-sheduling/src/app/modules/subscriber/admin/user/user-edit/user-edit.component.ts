@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { UserModel } from 'src/app/models/user.Model';
 import { UserService } from 'src/app/services/user.service';
 import { EmailModel } from 'src/app/models/email.model';
 import { PhoneModel } from 'src/app/models/phone.model';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'mrs-user-edit',
@@ -19,8 +20,10 @@ export class UserEditComponent implements OnInit {
   public _isNew: boolean;
   private _guidRegex = /^[\da-zA-Z]{8}-([\da-zA-Z]{4}-){3}[\da-zA-Z]{12}$/g;
   constructor(private activeRoute: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder,
-    private userService: UserService) {
+    private userService: UserService,
+    private snackBar: MatSnackBar) {
     this._company = activeRoute.snapshot.params['company'];
     this._id = activeRoute.snapshot.params['id'];
     this._isNew = !this._guidRegex.test(this._id);
@@ -89,13 +92,19 @@ export class UserEditComponent implements OnInit {
     if (this._isNew) {
         this.userService.create(record).then(x => {
           this.setRecordForm(x);
-          alert(`Created: ${x.id}`);
+          this.snackBar.open('Created', x.id, {
+            duration: 2000
+          });
+          this.router.navigate(['/', this._company, 'admin', 'user']);
         }
       );
     } else {
       this.userService.update(record).then(x => {
           this.setRecordForm(x);
-          alert(`Update: ${x.id}`);
+          this.snackBar.open('Updated', x.id, {
+            duration: 2000
+          });
+          this.router.navigate(['/', this._company, 'admin', 'user']);
       });
     }
   }

@@ -1,17 +1,13 @@
-<nav>
-    <span>
-        <a [routerLink]="['/', company]" routerLinkActive="router-link-active">Home</a>
-      </span>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <a mat-button [routerLink]="['/', company]" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{exact:
+        true}"><mrs-subscriber-name></mrs-subscriber-name></a>
+  <span class="fill-remaining-space"></span>
   <span>
-    <a [routerLink]="['/', company, 'admin', 'placegroup']" routerLinkActive="router-link-active">Place Group</a>
-  </span>
-  <span>
-    <a [routerLink]="['/', company, 'admin', 'place']" routerLinkActive="router-link-active">Place</a>
-  </span>
-  <span>
-    <a [routerLink]="['/', company, 'admin', 'user']" routerLinkActive="router-link-active">User</a>
-  </span>
-  <span>
-    <a [routerLink]="['/', company, 'admin', 'mysubscription']" routerLinkActive="router-link-active">My Subscription</a>
-  </span>
-</nav>
+      <a mat-button [routerLink]="['/', company, 'admin', 'placegroup']" routerLinkActive="mat-accent">Place Group</a>
+      <a mat-button [routerLink]="['/', company, 'admin', 'place']" routerLinkActive="mat-accent">Place</a>
+      <a mat-button [routerLink]="['/', company, 'admin', 'user']" routerLinkActive="mat-accent">User</a>
+      <a mat-button [routerLink]="['/', company, 'admin', 'mysubscription']" routerLinkActive="mat-accent">My Subscription</a>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>

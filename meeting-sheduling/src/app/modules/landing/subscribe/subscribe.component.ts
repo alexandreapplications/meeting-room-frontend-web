@@ -70,13 +70,13 @@ export class SubscribeComponent implements OnInit {
       this.subscriptionService.create(subscriberModel).then(valueSubscription => {
         this.userService.create(userModel).then(valueUser => {
           const userSubscriptionModel: UserSubscriptionModel = {
-            Id: '00000000-0000-0000-0000-000000000000',
-            SubscriptionId: valueSubscription.id,
-            UserId: valueUser.id,
-            IsOwner: true,
-            CreationDate: new Date(),
-            DeletionDate: null,
-            Roles: new Array<string>()
+            id: '00000000-0000-0000-0000-000000000000',
+            subscriptionId: valueSubscription.id,
+            userId: valueUser.id,
+            isOwner: true,
+            creationDate: new Date(),
+            deletionDate: null,
+            roles: new Array<string>()
           };
           this.userSubscriptionService.create(userSubscriptionModel).then(valueUserSubs => {
             alert('Funcionou');

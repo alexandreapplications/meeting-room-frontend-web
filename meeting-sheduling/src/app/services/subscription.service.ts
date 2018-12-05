@@ -30,7 +30,6 @@ export class SubscriptionService {
         } else {
           this._companyCache[subscriberCode] = subscriptionModel;
           resolve(subscriptionModel);
-
         }
       }).catch(rejectedReason => {
         reject(rejectedReason);
