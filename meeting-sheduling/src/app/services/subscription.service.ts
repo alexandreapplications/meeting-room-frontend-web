@@ -14,7 +14,7 @@ export class SubscriptionService {
   public create(model: SubscriptionModel): Promise<SubscriptionModel> {
     const url = `${ environment.apiUrls.security }subscription/create`;
 
-    return this.http.put<SubscriptionModel>(url, model).toPromise();
+    return this.http.post<SubscriptionModel>(url, model).toPromise();
   }
 
   public getSubscriber(subscriberCode): Promise<SubscriptionModel> {

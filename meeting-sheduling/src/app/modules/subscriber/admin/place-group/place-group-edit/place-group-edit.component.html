@@ -1,5 +1,35 @@
-<mrs-subscriber-menu></mrs-subscriber-menu>
-<p>
-  place-group-edit works!
-</p>
-<a [routerLink]="['../']" routerLinkActive="router-link-active" >List</a>
+<mrs-subscriber-framework>
+  <form [formGroup]='_recordForm' (ngSubmit)="onSubmit()" *ngIf="_recordForm">
+    <mat-card>
+      <mat-card-title>{{ (_isNew ? "Create" : "Edit") }} User</mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" formControlName="code" placeholder="Code" />
+          <mat-error *ngIf="_recordForm.get('code').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('code').getError('minlength')">This field must have at least {{
+            this._recordForm.get('code').getError('minlength').requiredLength }} chars</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="name" placeholder="Name" />
+          <mat-error *ngIf="_recordForm.get('name').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('name').getError('minlength')">
+            This field must have at least {{ this._recordForm.get('name').getError('minlength').requiredLength }} chars
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="building" placeholder="Building / Location" />
+          <mat-error *ngIf="_recordForm.get('building').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('building').getError('minlength')">
+            This field must have at least {{ this._recordForm.get('building').getError('minlength').requiredLength }}
+            chars
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox formControlName="enabled">Enabled</mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="submit" mat-button color="primary" [disabled]="_recordForm.invalid">Salvar</button>
+        <a mat-button color="basic" [routerLink]="['../']" routerLinkActive="router-link-active">Cancelar</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</mrs-subscriber-framework>

@@ -11,7 +11,8 @@ import { MySubscriptionComponent } from './my-subscription/my-subscription.compo
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../_shared/shared.module';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatTableModule, MatButtonModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatTableModule, MatButtonModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, 
+  MatSelectModule, MatCheckboxModule, MatListModule, MatDialogModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +27,10 @@ import { MatTableModule, MatButtonModule, MatIconModule, MatCardModule, MatFormF
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatDialogModule
   ],
   declarations: [
     PlaceGroupListComponent,

@@ -20,7 +20,7 @@ export class UserSubscriptionService {
   public create(model: UserSubscriptionModel): Promise<UserSubscriptionModel> {
     const url = `${environment.apiUrls.security}UserSubscription/create`;
 
-    return this.http.put<UserSubscriptionModel>(url, model).toPromise();
+    return this.http.post<UserSubscriptionModel>(url, model).toPromise();
   }
 
   public getUsersSubscriptionBySuscriptionId(id: string): Promise<Array<UserSubscriptionModel>> {

@@ -1,5 +1,42 @@
-<mrs-subscriber-menu></mrs-subscriber-menu>
-<p>
-  place-list works!
-</p>
-<a [routerLink]="['./10']" routerLinkActive="router-link-active" >Edit</a>
+<mrs-subscriber-framework [showWaitMessage]="wait">
+  <mat-card>
+    <mat-card-title>Users</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="placeList" *ngIf="placeList">
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Code</th>
+          <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="locationDescription">
+          <th mat-header-cell *matHeaderCellDef>Discription</th>
+          <td mat-cell *matCellDef="let element">{{ element.locationDescription }}</td>
+        </ng-container>
+        <ng-container matColumnDef="maxUsers">
+          <th mat-header-cell *matHeaderCellDef>Max Users</th>
+          <td mat-cell *matCellDef="let element">{{ element.maxUsers }}</td>
+        </ng-container>
+        <ng-container matColumnDef="rowActions">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element"><a mat-button [routerLink]="[element.id]">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <button mat-button (click)="deleteRecord(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button [routerLink]="['./new']" routerLinkActive="router-link-active" color="primary">
+        <mat-icon>add</mat-icon>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</mrs-subscriber-framework>

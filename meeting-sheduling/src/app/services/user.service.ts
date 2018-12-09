@@ -29,13 +29,13 @@ export class UserService {
 
     model.id = '00000000-0000-0000-0000-000000000000';
 
-    return this.http.put<UserModel>(url, model).toPromise();
+    return this.http.post<UserModel>(url, model).toPromise();
   }
 
   public update(model: UserModel): Promise<UserModel> {
-    const url = `${ environment.apiUrls.security }user/update`;
+    const url = `${ environment.apiUrls.security }user/update/${ model.id }`;
 
-    return this.http.post<UserModel>(url, model).toPromise();
+    return this.http.put<UserModel>(url, model).toPromise();
   }
 
   public doCreateTestUser(): Promise<UserModel> {

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrls: {
-    security: 'https://localhost:44355/api/'
+    security: 'https://localhost:5001/api/',
+    place: 'https://localhost:5011/api/'
   }
 };
 

@@ -1,5 +1,91 @@
-<mrs-subscriber-menu></mrs-subscriber-menu>
-<p>
-  place-edit works!
-</p>
-<a [routerLink]="['../']" routerLinkActive="router-link-active" >List</a>
+<mrs-subscriber-framework>
+  <form [formGroup]='_recordForm' (ngSubmit)="onSubmit()" *ngIf="_recordForm">
+    <mat-card>
+      <mat-card-title>{{ (_isNew ? "Create" : "Edit") }} User</mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" formControlName="code" placeholder="Code" />
+          <mat-error *ngIf="_recordForm.get('code').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('code').getError('minlength')">This field must have at least {{
+            this._recordForm.get('code').getError('minlength').requiredLength }} chars</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="name" placeholder="Name" />
+          <mat-error *ngIf="_recordForm.get('name').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('name').getError('minlength')">
+            This field must have at least {{ this._recordForm.get('name').getError('minlength').requiredLength }} chars
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="locationDescription" placeholder="Location discription" />
+          <mat-error *ngIf="_recordForm.get('locationDescription').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('locationDescription').getError('minlength')">
+            This field must have at least {{
+            this._recordForm.get('locationDescription').getError('minlength').requiredLength }}
+            chars
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Location Group" formControlName="placeGroupId">
+            <mat-option *ngFor="let item of _placeGroupList" [value]="item.id">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="maxUsers" placeholder="Max user count" />
+          <mat-error *ngIf="_recordForm.get('maxUsers').getError('required')">This field is required</mat-error>
+          <mat-error *ngIf="_recordForm.get('maxUsers').getError('min')">
+            This field must have at least {{ this._recordForm.get('maxUsers').getError('min').requiredValue }}
+            chars
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput type="text" formControlName="infrastructureAdd" placeholder="Add infrastructure" />
+          <mat-error *ngIf="_recordForm.get('infrastructureAdd').getError('minlength')">
+            This field must have at least {{
+            this._recordForm.get('infrastructureAdd').getError('minlength').requiredLength }}
+            chars
+          </mat-error>
+        </mat-form-field>
+        <button type="button" (click)="addItem(infrastructure, _recordForm.get('infrastructureAdd'))" mat-button>add</button>
+        <div formArrayName="infrastructure">
+          <mat-nav-list dense>
+            <mat-list-item *ngFor="let item of infrastructure.controls; let i = index">
+                <div matLine (click)="removeItem(infrastructure, i)">{{ item.value }}</div>
+              <button type="button" mat-icon-button (click)="removeItem(infrastructure, i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+        <br>
+        <mat-form-field>
+          <input matInput type="text" formControlName="optionalInfrastructureAdd" placeholder="Add infrastructure" />
+          <mat-error *ngIf="_recordForm.get('optionalInfrastructureAdd').getError('minlength')">
+            This field must have at least {{
+            this._recordForm.get('optionalInfrastructureAdd').getError('minlength').requiredLength }}
+            chars
+          </mat-error>
+        </mat-form-field>
+        <button type="button" [disabled]="this._recordForm.get('optionalInfrastructureAdd').invalid" (click)="addItem(optionalInfrastructure, _recordForm.get('optionalInfrastructureAdd'))"
+          mat-button>add</button>
+        <div formArrayName="optionalInfrastructure">
+          <mat-nav-list  dense>
+            <mat-list-item *ngFor="let item of optionalInfrastructure.controls; let i = index">
+              <div matLine (click)="removeItem(optionalInfrastructure, i)">{{ item.value }}</div>
+              <button  type="button" mat-icon-button (click)="removeItem(optionalInfrastructure, i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="submit" mat-button color="primary" [disabled]="_recordForm.invalid">Salvar</button>
+        <a mat-button color="basic" [routerLink]="['../']" routerLinkActive="router-link-active">Cancelar</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</mrs-subscriber-framework>
