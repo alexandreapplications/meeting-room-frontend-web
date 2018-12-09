@@ -120,7 +120,6 @@ export class PlaceEditComponent implements OnInit {
     const record = new PlaceModel;
 
     Object.assign(record, this._recordForm.value);
-    debugger;
     record.placeGroup = new PlaceGroupModel();
     record.placeGroup.id = this._recordForm.value.subscriberId;
     if (this._isNew) {
